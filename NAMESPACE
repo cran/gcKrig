@@ -1,0 +1,34 @@
+
+useDynLib(gcKrig, .registration = TRUE)
+
+import(Rcpp)
+importFrom(grDevices, gray)
+importFrom(stats, 
+           binomial, coef, cor, cov2cor, dbinom,
+             dist, dnbinom, dnorm, dpois, fitted, glm.fit,
+             integrate, median, optim, pbinom, pnbinom,
+             pnorm, poisson, ppois, printCoefmat, qbeta,
+             qbinom, qchisq, qgamma, qnbinom, qnorm, qpois,
+             qweibull, rbeta, rbinom, rgamma, rnbinom, rnorm,
+             rpois, rweibull)
+           
+
+
+
+
+
+export(gaussian.gc1, gm.gc1, beta.gc1, weibull.gc1, poisson.gc1, 
+       negbin.gc1, binomial.gc1, zip.gc1, matern.gc1, powerexp.gc1, 
+       spherical.gc1, poisson.gc2, negbin.gc2, binomial.gc2, zip.gc2, 
+       matern.gc2, powerexp.gc2, spherical.gc2, mvnintGHK, simgc, 
+       FHUBdiscrete, corrTG, mlegc, predgc)
+
+S3method(plot,simgc)
+S3method(plot,mlegc)
+S3method(print,mlegc)
+S3method(vcov,mlegc)
+S3method(profile,mlegc)
+S3method(summary,mlegc)
+S3method(print,summary.mlegc)
+S3method(plot,predgc)
+S3method(summary,predgc)
