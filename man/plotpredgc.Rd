@@ -14,9 +14,10 @@ Plot Geostatistical Data at Sampling and Prediction Locations
           }
 
 \description{
-Four plots will be generated. A level plot with the number of counts at both observed and
+Five plots will be generated. A level plot with the number of counts at both observed and
 prediction locations; a
-level plot with predicted means (intensity); a level plot with the predicted counts; a
+level plot with predicted means (intensity); a level plot with the predicted counts;
+a level plot with estimated variances of the prediction; a
 3-D scatter plot with both observed and predicted counts.
 }
 

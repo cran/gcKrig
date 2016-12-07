@@ -154,7 +154,7 @@ malariax <- data.frame(netuse = malaria$netuse,
                        green = malaria$green/100,
                        phc = malaria$phc)
 Fitmalaria <- mlegc(y = malaria$cases, x = malariax, locs = malaria[,1:2],
-                    marginal = binomial.gc2(link='logit'),
+                    marginal = binomial.gc2(link='logit'), corrpar0 = 1.5, 
                     corr = matern.gc2(kappa = 0.5, nugget = FALSE),
                     distscale = 0.001, effort = malaria$size, method = 'GHK')
 summary(Fitmalaria)

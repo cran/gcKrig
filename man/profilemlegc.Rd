@@ -24,7 +24,7 @@ to find the approximate lower and upper bound.
 
  \item{par.index}{the index of the parameter which should be profiled.  }
 
-  \item{alpha}{the significance level, default is \code{0.05} which is corresponding to \code{95}
+  \item{alpha}{the significance level, default is \code{0.05} which corresponds to \code{95}
   percent confidence interval.}
 
   \item{start.point}{numeric vector of length 2 indicating the starting points for finding the

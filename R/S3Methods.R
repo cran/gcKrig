@@ -365,7 +365,13 @@ plot.predgc <- function(x, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NUL
                            col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex,
                            main = mainall[2]))
 
-  #### Plot3 Predicted Variance
+  #### Plot3 Predicted Counts
+  print(lattice::levelplot(X$predCount ~ X$pred.locs[,1] + X$pred.locs[,2],
+                           panel = latticeExtra::panel.levelplot.points,
+                           col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex,
+                           main = mainall[2]))
+
+  #### Plot4 Predicted Variance
   print(lattice::levelplot(X$predVar ~ X$pred.locs[,1] + X$pred.locs[,2],
                            panel = latticeExtra::panel.levelplot.points,
                            col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex,
@@ -376,7 +382,7 @@ plot.predgc <- function(x, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NUL
 
   ####
   if (requireNamespace("scatterplot3d", quietly = TRUE)) {
-  #### Plot4
+  #### Plot5
   K1 <- length(X$obs.y)
   K2 <- nrow(X$pred.locs)
   scatterplot3d::scatterplot3d(x = locall[,1], y = locall[,2], z = Data,

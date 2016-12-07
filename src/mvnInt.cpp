@@ -105,7 +105,7 @@ RcppExport SEXP mvnintGHKOcpp(SEXP mu_, SEXP R_, SEXP lower_, SEXP upper_, SEXP 
   }
 
   *res /= nrep;
-  double mcstd = arma::stddev(mcsample)/sqrt(nrep);
+  double mcstd = arma::stddev(mcsample)/std::sqrt((double)nrep);
   if(*res == 0 || std::isnan(*res)){
     *res = EPS;
   }
@@ -150,7 +150,7 @@ RcppExport SEXP mvnintGHKcpp(SEXP mu_, SEXP R_, SEXP lower_, SEXP upper_, SEXP n
     mcsample(i) = prod;
   }
   *res /= nrep;
-  double mcstd = arma::stddev(mcsample)/sqrt(nrep);
+  double mcstd = arma::stddev(mcsample)/std::sqrt((double)nrep);
   if(*res == 0 || std::isnan(*res)){
     *res = EPS;
   }
