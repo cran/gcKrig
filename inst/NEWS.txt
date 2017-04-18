@@ -1,0 +1,6 @@
+Version 1.0.2
+-------------
+- enable users to input estimates in prediction
+- add function plotgc for a general geostatistical plot
+- bugs fixed
+

@@ -22,9 +22,7 @@ trans-Gaussian random field.
 The Beta distribution with parameters \code{shape1 = a} and \code{shape2 = b} has density
 
 
-\deqn{\frac{\Gamma(a+b)}{\Gamma(a) \Gamma(b)} \Big(\frac{b}{b+a}\Big)^b
-        \Big(1 - \frac{b}{b+a}\Big)^y }{(\Gamma(a+b)/(\Gamma(a)\Gamma(b))) * x^(a-1) * (1-x)^(b-1)
-}
+\deqn{\frac{\Gamma(a+b)}{\Gamma(a) \Gamma(b)} x^{a-1} (1-x)^{b-1}}
 
 
 for \eqn{a > 0, b > 0} and \eqn{0 \le x \le 1} where the boundary values at

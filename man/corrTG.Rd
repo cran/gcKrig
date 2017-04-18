@@ -7,8 +7,8 @@ corrTG(marg1, marg2, corrGaus = 0.5, method = "integral", nrep = 1000)
 }
 
 \description{
-	This function implements two general methods for computing the correlation function in 
-	a transformed Gaussian random field. 
+	This function implements two general methods for computing the correlation function in
+	a transformed Gaussian random field.
 }
 
 
@@ -31,12 +31,13 @@ If use "mc" then the Monte Carlo method will be used.}
 A scalar between 0 and 1, denoting the correlation of the transformed Gaussian random field.
 }
 \examples{
+\dontrun{
 corrTG(marg1 = poisson.gc1(lambda = 10), marg2 = binomial.gc1(size = 1, prob = 0.1),
        corrGaus = 0.5, method = "integral")
 set.seed(12345)
 corrTG(marg1 = poisson.gc1(lambda = 10), marg2 = binomial.gc1(size = 1, prob = 0.1),
        corrGaus = 0.5, nrep = 100000, method = "mc")
-
+}
 }
 \author{
 Zifei Han \email{hanzifei1@gmail.com}

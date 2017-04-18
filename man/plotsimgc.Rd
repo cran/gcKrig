@@ -6,7 +6,7 @@ Plot Geostatistical Data Simulated From Gaussian Copula
 }
 
 \usage{
-\method{plot}{simgc}(x, index, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL,
+\method{plot}{simgc}(x, index = 1, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL,
      pch = 20, textcex = 0.8, plotcex = 1, angle = 60, col = 4,
      col.regions = gray(90:0/100),...)
           }

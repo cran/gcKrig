@@ -6,12 +6,16 @@
 #### ----------------------------------------------------------------------------------------------------
 
 plot.simgc <- function(
-    x, index, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL,
+    x, index = 1, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL,
     pch = 20, textcex = 0.8, plotcex = 1, angle = 60, col = 4, col.regions = gray(90:0/100),...
 ){
   X <- x
-  rm(x)
+  rm(x) # to avoid name conflicts
+  if(is.null(ncol(X$data))){
+    Data <- X$data
+  }else{
   Data <- X$data[index,]
+  }
   r1 <- apply(X$locs, 2, range)
   if(is.null(xlim)) xlim <- r1[,1]
   if(is.null(ylim)) ylim <- r1[,2]
@@ -30,7 +34,7 @@ plot.simgc <- function(
                      col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex))
   }else{
     stop("Unable to Provide level Plot. Please install {latticeExtra} first!")
-  }
+}
 
   # Plot3
   if (requireNamespace("scatterplot3d", quietly = TRUE)) {

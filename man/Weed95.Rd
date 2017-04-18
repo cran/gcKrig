@@ -20,8 +20,9 @@ from observations of soil texture and soil chemical properties.
     \item{\code{xloc}}{Cartesian x-coordinate of the locations (in meter).}
     \item{\code{yloc}}{Cartesian y-coordinate of the locations (in meter).}
     \item{\code{weedcount}}{Number of weed collected at the given site.}
-    \item{\code{organic1}}{One chemical component indicating the organic matter of the soil.}
-    \item{\code{organic2}}{Another chemical component indicating the organic matter of the soil.}
+    \item{\code{scaled Y coord}}{The scaled Y coordinate with range -1 to 1 as a
+    covariate in regression.}
+    \item{\code{organic}}{Another chemical component indicating the organic matter of the soil.}
     \item{\code{dummy}}{A dummy variable taking values 0 or 1. If 0 it is
      treated as observed location and 1 treated as predicted location in Christensen and Waagepetersen (2002). }
   }

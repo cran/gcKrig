@@ -77,7 +77,7 @@ FHUBdiscrete <- function(marg1, marg2, mu1, mu2, od1 = 0, od2 = 0,
       corr <- try(FHUBNB2_R(m1 = mu1, m2 = mu2, od1 = od1, od2 = od2), silent = T)
 
     if(marg1 == 'binomial' & marg2 == 'binomial')
-      corr <- try(FHUBbinom_R(m1 = mu1, m2 = mu2, n1 = binomial.size1, 
+      corr <- try(FHUBbinom_R(m1 = mu1, m2 = mu2, n1 = binomial.size1,
                               n2 = binomial.size2), silent = T)
 
     if( (marg1 == 'nb' & marg2 == 'zip') | (marg1 == 'nb' & marg2 == 'poisson') )
@@ -91,10 +91,10 @@ FHUBdiscrete <- function(marg1, marg2, mu1, mu2, od1 = 0, od2 = 0,
       corr <- try(FHUBZIPbinomial_R(zipmu = mu1, bmu = mu2, zipod = od1, bn = binomial.size2), silent = T)
 
     if( (marg1 == 'nb' & marg2 == 'binomial'))
-      corr <- try(FHUBNB2binomial_R(nbmu = mu1, bmu = mu2, nbod = od1, 
+      corr <- try(FHUBNB2binomial_R(nbmu = mu1, bmu = mu2, nbod = od1,
                                     bn = binomial.size2), silent = T)
     if( (marg2 == 'nb' & marg1 == 'binomial'))
-      corr <- try(FHUBNB2binomial_R(nbmu = mu2, bmu = mu1, nbod = od2, 
+      corr <- try(FHUBNB2binomial_R(nbmu = mu2, bmu = mu1, nbod = od2,
                                     bn = binomial.size1), silent = T)
 
     if(corr > 99)
@@ -116,7 +116,7 @@ corrTG <- function(marg1, marg2, corrGaus = 0.5, method = "integral", nrep = 100
   if(method == "integral"){
     for(u in 1:50){
       atmp[u] = marg1$int.marg(order = u)[[1]]*marg2$int.marg(order = u)[[1]]*(corrGaus)^(u)/factorial(u)
-      if (abs(atmp[u]) < .Machine$double.eps^0.25*sqrt(marg1$margvar*marg2$margvar) )
+      if (abs(atmp[u]) < .Machine$double.eps^0.5*sqrt(marg1$margvar*marg2$margvar) )
         break
     }
     corr <- sum(atmp)/sqrt(marg1$margvar*marg2$margvar)

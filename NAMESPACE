@@ -13,7 +13,7 @@ importFrom(stats,
              rpois, rweibull)
            
 
-
+importFrom(graphics, lines, plot, points)
 
 
 
@@ -21,7 +21,7 @@ export(gaussian.gc1, gm.gc1, beta.gc1, weibull.gc1, poisson.gc1,
        negbin.gc1, binomial.gc1, zip.gc1, matern.gc1, powerexp.gc1, 
        spherical.gc1, poisson.gc2, negbin.gc2, binomial.gc2, zip.gc2, 
        matern.gc2, powerexp.gc2, spherical.gc2, mvnintGHK, simgc, 
-       FHUBdiscrete, corrTG, mlegc, predgc)
+       FHUBdiscrete, corrTG, mlegc, predgc, plotgc)
 
 S3method(plot,simgc)
 S3method(plot,mlegc)

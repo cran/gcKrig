@@ -167,7 +167,8 @@ likGQTXX <- function(pars, y, XX, locs, marginal, corr, effort, longlat, distsca
 
 predGQT <- function(
     obs.y, obs.x = NULL, obs.locs, pred.x = NULL, pred.locs, longlat = FALSE, distscale = 1,
-      marginal, corr, sample.effort = 1, pred.effort = 1, corrpar0 = NULL, pred.interval = NULL
+      marginal, corr, obs.effort = 1, pred.effort = 1, estpar = NULL,
+       corrpar0 = NULL, pred.interval = NULL
 ){
 
   x <- as.data.frame(cbind(rep(1,length(obs.y)), obs.x))
@@ -179,8 +180,8 @@ predGQT <- function(
   if(!is.matrix(obs.locs) & !is.data.frame(obs.locs))
     stop("Input 'obs.locs' must be a data frame or matrix!")
 
-  if(length(sample.effort) == 1) sample.effort <- rep(sample.effort, nrow(obs.locs))
-  if(!length(sample.effort) == nrow(obs.locs))
+  if(length(obs.effort) == 1) obs.effort <- rep(obs.effort, nrow(obs.locs))
+  if(!length(obs.effort) == nrow(obs.locs))
     stop("Sampling Effort must be equal to the number of sampling locations!")
 
   if(length(pred.effort) == 1) pred.effort <- rep(pred.effort, nrow(pred.locs))
@@ -189,11 +190,18 @@ predGQT <- function(
     stop("Prediction Effort must be equal to the number of prediction locations!")
 
   #### First calculate the MLE and output the log-likelihood as denominator
+  if(is.null(estpar)){
 
-  MLE.est <- mleGQT(y = obs.y, x = x[,-1], locs = obs.locs, marginal = marginal, corr = corr, effort = sample.effort,
+  MLE.est <- mleGQT(y = obs.y, x = x[,-1], locs = obs.locs, marginal = marginal, corr = corr, effort = obs.effort,
                     longlat = longlat, distscale = distscale, corrpar0 = corrpar0)
 
   loglik <- MLE.est$log.lik; estpar <- MLE.est$MLE
+
+  }else{
+
+  loglik <- -likGQT(pars = estpar, y = obs.y, x = x, locs = obs.locs, marginal = marginal, corr = corr,
+                    effort = obs.effort, longlat = longlat, distscale = distscale)
+  }
 
   if(is.null(pred.x)) {
     pred.x <- matrix(1, nrow = nrow(pred.locs), ncol = 1)
@@ -209,17 +217,17 @@ predGQT <- function(
   if (requireNamespace("FNN", quietly = TRUE)) {
    if(nrow(pred.locs) == 1){
       indexloc <- which.min(FNN::get.knnx(pred.locs, obs.locs, 1)$nn.dist)
-     m0 <- n0 <- round(unique(pred.effort)*obs.y[indexloc]/sample.effort[indexloc])+1
+     m0 <- n0 <- round(unique(pred.effort)*obs.y[indexloc]/obs.effort[indexloc])+1
   }else{
     m0 <- n0 <- round(pred.effort*apply(pred.locs, 1, function(x) obs.y[which.min(FNN::get.knnx(t(as.matrix(x)),
-            obs.locs, 1)$nn.dist)]/sample.effort[which.min(FNN::get.knnx(t(as.matrix(x)), obs.locs, 1)$nn.dist)]))+1
+            obs.locs, 1)$nn.dist)]/obs.effort[which.min(FNN::get.knnx(t(as.matrix(x)), obs.locs, 1)$nn.dist)]))+1
    }
   }else{
     stop("Please install {FNN} first!")
   }
   NPL <- length(m0)
   #### m0 and n0: initial prediction values for probability search. Scalor or Vector
-  max.count <- ceiling(5*max(obs.y/sample.effort)*max(pred.effort))
+  max.count <- ceiling(5*max(obs.y/obs.effort)*max(pred.effort))
 
   #### A for loop which cannot be avoided
 
@@ -233,7 +241,7 @@ predGQT <- function(
     tmpfun2 <- function(xtmp){
       exp(-likGQT(pars = estpar, y = c(obs.y, xtmp), x = rbind(as.matrix(x), pred.x[j,]),
                   locs = rbind(obs.locs, pred.locs[j,]), marginal = marginal, corr = corr,
-                  effort = c(sample.effort, pred.effort[j]), longlat = longlat, distscale = distscale) - loglik)
+                  effort = c(obs.effort, pred.effort[j]), longlat = longlat, distscale = distscale) - loglik)
     }
 
     p.m0 <- p.n0 <- tmpfun2(m0[j]); mu.m0 <- mu.n0 <- p.m0*m0[j];  mu2.m0 <- mu2.n0 <- p.m0*m0[j]^2
@@ -313,7 +321,8 @@ if(!is.null(pred.interval)){
 
 predGQT.sf <- function(
     obs.y, obs.x = NULL, obs.locs, pred.x = NULL, pred.locs, longlat = FALSE, distscale = 1, marginal, corr,
-    sample.effort = 1, pred.effort = 1, corrpar0 = NULL, pred.interval = NULL, n.cores = 2, cluster.type="SOCK"
+    obs.effort = 1, pred.effort = 1, estpar = NULL,
+    corrpar0 = NULL, pred.interval = NULL, n.cores = 2, cluster.type="SOCK"
 ){
   x <- as.data.frame(cbind(rep(1,length(obs.y)), obs.x))
   colnames(x)[1] <- c("Intercept")
@@ -324,8 +333,8 @@ predGQT.sf <- function(
   if(!is.matrix(obs.locs) & !is.data.frame(obs.locs))
     stop("Input 'obs.locs' must be a data frame or matrix!")
 
-  if(length(sample.effort) == 1) sample.effort <- rep(sample.effort, nrow(obs.locs))
-  if(!length(sample.effort) == nrow(obs.locs))
+  if(length(obs.effort) == 1) obs.effort <- rep(obs.effort, nrow(obs.locs))
+  if(!length(obs.effort) == nrow(obs.locs))
     stop("Sampling Effort must be equal to the number of sampling locations!")
 
   if(length(pred.effort) == 1) pred.effort <- rep(pred.effort, nrow(pred.locs))
@@ -335,10 +344,15 @@ predGQT.sf <- function(
 
   #### First calculate the MLE and output the log-likelihood as denominator
 
+  if(is.null(estpar)){
   MLE.est <- mleGQT(y = obs.y, x = x[,-1], locs = obs.locs, marginal = marginal, corr = corr,
-                    effort = sample.effort, longlat = longlat, distscale = distscale, corrpar0 = corrpar0)
+                    effort = obs.effort, longlat = longlat, distscale = distscale, corrpar0 = corrpar0)
 
   loglik <- MLE.est$log.lik; estpar <- MLE.est$MLE
+  }else{
+  loglik <- -likGQT(pars = estpar, y = obs.y, x = x, locs = obs.locs, marginal = marginal, corr = corr,
+                    effort = obs.effort, longlat = longlat, distscale = distscale)
+  }
 
   if(is.null(pred.x)) {
     pred.x <- matrix(1, nrow = nrow(pred.locs), ncol = 1)
@@ -354,10 +368,10 @@ predGQT.sf <- function(
   if (requireNamespace("FNN", quietly = TRUE)) {
    if(nrow(pred.locs) == 1){
     indexloc <- which.min(FNN::get.knnx(pred.locs, obs.locs, 1)$nn.dist)
-    m0 <- n0 <- round(unique(pred.effort)*obs.y[indexloc]/sample.effort[indexloc])+1
+    m0 <- n0 <- round(unique(pred.effort)*obs.y[indexloc]/obs.effort[indexloc])+1
   }else{
     m0 <- n0 <- round(pred.effort*apply(pred.locs, 1, function(x) obs.y[which.min(FNN::get.knnx(t(as.matrix(x)),
-                  obs.locs, 1)$nn.dist)]/sample.effort[which.min(FNN::get.knnx(t(as.matrix(x)), obs.locs, 1)$nn.dist)]))+1
+                  obs.locs, 1)$nn.dist)]/obs.effort[which.min(FNN::get.knnx(t(as.matrix(x)), obs.locs, 1)$nn.dist)]))+1
    }
   }else{
     stop("Please install {FNN} first!")
@@ -365,7 +379,7 @@ predGQT.sf <- function(
   NPL <- length(m0)
   #### m0 and n0: initial prediction values for probability search. Scalor or Vector
 
-  max.count <- ceiling(5*max(obs.y/sample.effort)*max(pred.effort))
+  max.count <- ceiling(5*max(obs.y/obs.effort)*max(pred.effort))
 
   #### A for loop which cannot be avoided
 
@@ -383,7 +397,7 @@ predGQT.sf <- function(
       tmpfun2 <- function(xtmp){
         exp(-likGQT(pars = estpar, y = c(obs.y, xtmp), x = rbind(as.matrix(x), pred.x[j,]),
                     locs = rbind(obs.locs, pred.locs[j,]), marginal = marginal, corr = corr,
-                    effort = c(sample.effort, pred.effort[j]), longlat = longlat, distscale = distscale) - loglik)
+                    effort = c(obs.effort, pred.effort[j]), longlat = longlat, distscale = distscale) - loglik)
       }
 
       p.m0 <- p.n0 <- tmpfun2(m0[j]); mu.m0 <- mu.n0 <- p.m0*m0[j];  mu2.m0 <- mu2.n0 <- p.m0*m0[j]^2

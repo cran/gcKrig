@@ -4,8 +4,8 @@
 \title{Prediction at Unobserved Locations in Gaussian Copula Models for Geostatistical Count Data}
 \usage{
 predgc(obs.y, obs.x = NULL, obs.locs, pred.x = NULL, pred.locs,
-       longlat = FALSE, distscale = 1, marginal, corr, sample.effort = 1,
-       pred.effort = 1, method = "GHK", corrpar0 = NULL,
+       longlat = FALSE, distscale = 1, marginal, corr, obs.effort = 1,
+       pred.effort = 1, method = "GHK", estpar = NULL, corrpar0 = NULL,
        pred.interval = NULL, parallel = FALSE,
        ghkoptions = list(nrep = c(100,1000), reorder = FALSE, seed = 12345),
        paralleloptions = list(n.cores = 2, cluster.type = "SOCK"))
@@ -18,7 +18,7 @@ equals to the number of observed locations.}
 with its number of rows equals to the number of observed locations.
 If no covariates then \code{obs.x = NULL}.}
 
-\item{obs.locs}{a numeric matrix or data frame of observed locations.
+\item{obs.locs}{a numeric matrix or data frame of observed locations.obs.effort
 The first column is \emph{x} or longitude, the second column is \emph{y} or latitude.
 The number of observed locations is equal to the number of rows.}
 
@@ -39,7 +39,7 @@ The number of prediction locations equals to the number of rows.}
 
 \item{corr}{an object of class \code{\link{corr.gc2}} specifying the correlation function.}
 
-\item{sample.effort}{sampling effort at observed locations.
+\item{obs.effort}{sampling effort at observed locations.
 For binomial marginal it is the size parameter (number of trials). See details.}
 
 \item{pred.effort}{sampling effort at prediction locations.
@@ -48,6 +48,11 @@ For binomial marginal it is the size parameter (number of trials). See details.}
 \item{method}{two methods are implemented. If
 \code{method = 'GHK'} then the maximum simulated likelihood estimates are computed, if
 \code{method = 'GQT'} then the maximum surrogate likelihood estimates are computed.}
+
+\item{estpar}{if \code{estpar = NULL} then the likelihood estimates
+will be computed first, then plug-in into the predictive density. If estimates are obtained
+from the previous analysis, it is suggested to specify \code{estpar} with the parameter estimates.
+}
 
 \item{corrpar0}{the starting value of correlation parameters in optimization procedure.
         If \code{corrpar0 = NULL} then
@@ -110,7 +115,7 @@ generalized quantile transform method is used in integral approximation.
 \details{
 This program implemented two methods in predicting the response at unobserved sites. See \code{\link{mlegc}}.
 
-         The argument \code{sample.effort} and \code{pred.effort}
+         The argument \code{obs.effort} and \code{pred.effort}
          are the sampling effort (known). It can be used to consider heterogeneity of
          the measurement time or area at different locations. The default is 1 for all locations.
          See Han and De Oliveira (2016) for more details.
@@ -151,7 +156,7 @@ locOilpred <- data.frame(Easting = expand.grid(gridstep, gridstep)[,1],
                         Northing = expand.grid(gridstep, gridstep)[,2])
 PredOil <- predgc(obs.y = OilWell[,3], obs.locs = OilWell[,1:2],  pred.locs = locOilpred,
                        marginal = binomial.gc2(link = 'logit'),
-                       corr = matern.gc2(nugget = FALSE), sample.effort = 1,
+                       corr = matern.gc2(nugget = FALSE), obs.effort = 1,
                        pred.effort = 1, method = 'GHK',
                        parallel = TRUE, paralleloptions = list(n.cores = 4))
 PredMat <- summary(PredOil)

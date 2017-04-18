@@ -218,7 +218,7 @@ matern.gc1 <- function(range = 0, kappa = 0.5, nugget = 0){
 powerexp.gc1 <- function(range = 0, kappa = 1, nugget = 0){
   ans <- list()
   if(kappa > 2)
-    stop("'Kappa' Must be less than or equal to 2")
+    stop("'Kappa' must be between 0 and 2")
   ans$S <- function(D) (1-nugget)*exp(-abs( (D/range)^(kappa) )) + nugget*diag(NROW(D))
   class(ans) <- c("corr.gc1")
   return(ans)
@@ -436,7 +436,7 @@ matern.gc2 <- function(kappa = 0.5, nugget = TRUE){
 powerexp.gc2 <- function(kappa = 1, nugget = TRUE){
   ans <- list()
   if(kappa > 2)
-    stop("'Kappa' Must be less than or equal to 2")
+    stop("'Kappa' must be between 0 and 2")
   if(nugget == TRUE){
     ans$nug <- 1
     ans$npar.cor <- 2

@@ -1,16 +1,15 @@
 Package: gcKrig
 Type: Package
-Title: Analyze and Interpolate Geostatistical Count Data using Gaussian
-        Copula
-Version: 1.0.1
+Title: Analysis of Geostatistical Count Data using Gaussian Copulas
+Version: 1.0.2
 Author: Zifei Han
 Maintainer: Zifei Han <hanzifei1@gmail.com>
 Description: Provides a variety of functions to analyze and model
     geostatistical count data with Gaussian copulas, including
  1) data simulation and visualization; 
- 2) correlation structure assessment (here also known as the NORTA); 
+ 2) correlation structure assessment (here also known as the Normal To Anything); 
  3) calculate multivariate normal rectangle probabilities; 
- 4) likelihood inference and parallel prediction at unsampled locations.
+ 4) likelihood inference and parallel prediction at predictive locations.
 License: GPL (>= 2)
 LazyData: TRUE
 Depends: R (>= 3.2.5)
@@ -19,6 +18,6 @@ LinkingTo: Rcpp, RcppArmadillo
 Suggests: EQL, FNN, lattice, latticeExtra, Matrix, MASS, numDeriv,
         scatterplot3d, snowfall, sp
 NeedsCompilation: yes
-Packaged: 2016-12-07 03:41:20 UTC; zifeihan
+Packaged: 2017-04-18 04:07:48 UTC; zifeihan
 Repository: CRAN
-Date/Publication: 2016-12-07 08:43:40
+Date/Publication: 2017-04-18 05:29:03 UTC
