@@ -6,7 +6,7 @@
 #### ----------------------------------------------------------------------------------------------------
 
 plot.simgc <- function(
-    x, index = 1, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL,
+    x, index = 1, plottype = 'Text', xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL,
     pch = 20, textcex = 0.8, plotcex = 1, angle = 60, col = 4, col.regions = gray(90:0/100),...
 ){
   X <- x
@@ -21,22 +21,23 @@ plot.simgc <- function(
   if(is.null(ylim)) ylim <- r1[,2]
 
   if (requireNamespace("latticeExtra", quietly = TRUE)) {
-  # Plot1
-   print(lattice::levelplot(Data ~  X$locs[,1] + X$locs[,2], col.regions = col.regions,
+  ## Plot1
+   plot1 <- lattice::levelplot(Data ~  X$locs[,1] + X$locs[,2], col.regions = col.regions,
                             xlab = xlab, ylab = ylab, cex = plotcex,
                             panel = function(x,y,z,...) {
                               lattice::panel.levelplot(x,y,z,...)
                               lattice::panel.text(X$locs[,1], X$locs[,2],  Data, col = col, cex = textcex)
-                            }))
+                            })
 
   ## Plot2
-  print(lattice::levelplot(Data ~ X$locs[,1] + X$locs[,2], panel = latticeExtra::panel.levelplot.points,
-                     col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex))
+  plot2 <- lattice::levelplot(Data ~ X$locs[,1] + X$locs[,2], panel = latticeExtra::panel.levelplot.points,
+                     col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex)
   }else{
     stop("Unable to Provide level Plot. Please install {latticeExtra} first!")
 }
 
-  # Plot3
+  ## Plot3
+  if(plottype == '3D'){
   if (requireNamespace("scatterplot3d", quietly = TRUE)) {
     scatterplot3d::scatterplot3d(x = X$locs[,1], y = X$locs[,2], z = Data, highlight.3d = TRUE,
                                  col.grid = "lightblue",  type='h', xlim = xlim, ylim = ylim,
@@ -46,6 +47,13 @@ plot.simgc <- function(
     stop("Unable to Provide Three Dimensional Plot.
          Please install {scatterplot3d} first!")
   }
+ }
+  if(plottype == 'Text'){
+    print(plot1)
+  }
+  if(plottype == 'Dot'){
+    print(plot2)
+  }
 }
 
 
@@ -53,9 +61,10 @@ plot.simgc <- function(
 #### S3 Method on Maximum Likelihood Estimate Results ---------------------------------------------------
 #### ----------------------------------------------------------------------------------------------------
 
-plot.mlegc <- function(x, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL, displaymain = FALSE,
-                         pch = 20, textcex = 0.8, plotcex = 1, angle = 60, col = 4,
-                         col.regions = gray(90:0/100),...)
+plot.mlegc <- function(x, plotdata = "Observed", plottype = "2D",
+                       xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL,
+                       pch = 20, textcex = 0.8, plotcex = 1, angle = 60, col = 4,
+                       col.regions = gray(90:0/100),...)
 {
   fitted <- x
   rm(x)
@@ -64,28 +73,21 @@ plot.mlegc <- function(x, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL
 
   Data <- fitted$args$y
 
-  if(displaymain == TRUE){
-    mainall <- c('Observations', 'Fitted Mean',
-                 'Observations', 'Fitted Mean')
-  }else{
-    mainall <- NULL
-  }
-
 
   if (requireNamespace("latticeExtra", quietly = TRUE)) {
     ####  Plot1 Originl Count
-    print(lattice::levelplot(Data ~ fitted$args$locs[,1] + fitted$args$locs[,2],
+    plot1 <- lattice::levelplot(Data ~ fitted$args$locs[,1] + fitted$args$locs[,2],
                              col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex,
-                             main = mainall[1], panel = function(x, y, z, ...) {
+                             main = NULL, panel = function(x, y, z, ...) {
                                lattice::panel.levelplot(x, y, z, ...)
                                lattice::panel.text(fitted$args$locs[,1], fitted$args$locs[,2],
                                           Data, col = col, cex = textcex)
-                             }))
+                             })
 
     #### Plot2 Fitted Means
-    print(lattice::levelplot(Fitmean ~ fitted$args$locs[,1] + fitted$args$locs[,2],
+    plot2 <- lattice::levelplot(Fitmean ~ fitted$args$locs[,1] + fitted$args$locs[,2],
                              col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex,
-                             main = mainall[2]))
+                             main = NULL)
 
     #                         panel = function(...) {
     #                           lattice::panel.levelplot(...)
@@ -93,20 +95,35 @@ plot.mlegc <- function(x, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL
   }else{
     stop("Unable to Provide level Plot. Please install {latticeExtra} first!")
   }
+
+  if(plotdata == "Observed" & plottype == "2D") print(plot1)
+  if(plotdata == "Fitted" & plottype == "2D") print(plot2)
+
+
    #### Plot3 3d Plot Original
 
   if (requireNamespace("scatterplot3d", quietly = TRUE)) {
+
+
+    if(plotdata == "Observed" & plottype == "3D"){
+
     scatterplot3d::scatterplot3d(x = fitted$args$locs[,1], y = fitted$args$locs[,2],
                                  z = Data, color = col, col.grid = "lightblue",
-                                 type='h', xlim = xlim, ylim = ylim, main = mainall[3],
+                                 type='h', xlim = xlim, ylim = ylim, main = NULL,
                                  col.axis = "blue", xlab = xlab, ylab = ylab, angle = angle,  pch = pch,
                                  scale.y=1.2, y.margin.add = 0.2)
+
+    }
     #### Plot4 3d Plot Fitted
+
+    if(plotdata == "Fitted" & plottype == "3D"){
+
     scatterplot3d::scatterplot3d(x = fitted$args$locs[,1], y = fitted$args$locs[,2],
                                  z = Fitmean, color = col, col.grid = "lightblue",
-                                 type='h', xlim = xlim, ylim = ylim, main = mainall[4],
+                                 type='h', xlim = xlim, ylim = ylim, main = NULL,
                                  col.axis = "blue", xlab = xlab, ylab = ylab, angle = angle,  pch = pch,
                                  scale.y=1.2, y.margin.add = 0.2)
+    }
 
   }else{
     stop("Unable to Provide Three Dimensional Plot.
@@ -330,10 +347,11 @@ print.summary.mlegc <- function(x, digits = max(3, getOption("digits") - 3), ...
 
 #### S3 Method on prediction results --------------------------------------------------------------------
 #### ----------------------------------------------------------------------------------------------------
-plot.predgc <- function(x, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL, displaymain = FALSE,
-                        pch = 20, textcex = 0.6, plotcex = 1, angle = 60,
-                          col = c(2, 4), col.regions = gray(90:0/100),...)
+plot.predgc <- function(x, plottype = "2D All", xlab = "xloc", ylab = "yloc",
+                        xlim = NULL, ylim = NULL, pch = 20, textcex = 0.6, plotcex = 1,
+                        angle = 60, col = c(2, 4), col.regions = gray(90:0/100),...)
 {
+# 2D All; Predicted Counts; Predicted Means; Predicted Variance; 3D All
 
   X <- x
   rm(x)
@@ -343,18 +361,12 @@ plot.predgc <- function(x, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NUL
   if(is.null(xlim)) xlim <- r1[,1]
   if(is.null(ylim)) ylim <- r1[,2]
 
-
-  if(displaymain == TRUE){
-    mainall <- c('Observed and Predicted Counts',
-                 'Predicted Intensity', 'Predicted Variance')
-  }else{
-    mainall <- NULL
-  }
-
   if (requireNamespace("latticeExtra", quietly = TRUE)) {
  ####  Plot1
+
+  if(plottype == "2D All"){
   print(lattice::levelplot(Data ~ locall[,1] + locall[,2], col.regions = col.regions,
-                           xlab = xlab, ylab = ylab, cex = plotcex, main = mainall[1],
+                           xlab = xlab, ylab = ylab, cex = plotcex, main = NULL,
                            panel = function(...) {
                              lattice::panel.levelplot(...)
                              lattice::panel.text(X$obs.locs[,1], X$obs.locs[,2],
@@ -362,31 +374,42 @@ plot.predgc <- function(x, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NUL
                              lattice::panel.text(X$pred.locs[,1], X$pred.locs[,2],
                                         X$predCount, col = col[2], cex = textcex)
                            }))
+  }
 
-  #### Plot2 Predicted Intensity
+  #### Plot2 Predicted Counts
+  if(plottype == "Predicted Counts"){
+    print(lattice::levelplot(X$predCount ~ X$pred.locs[,1] + X$pred.locs[,2],
+                               panel = latticeExtra::panel.levelplot.points,
+                               col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex,
+                               main = NULL))
+    }
+
+
+  #### Plot3 Predicted Mean
+
+  if(plottype == "Predicted Mean"){
   print(lattice::levelplot(X$predValue ~ X$pred.locs[,1] + X$pred.locs[,2],
                            panel = latticeExtra::panel.levelplot.points,
                            col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex,
-                           main = mainall[2]))
-
-  #### Plot3 Predicted Counts
-  print(lattice::levelplot(X$predCount ~ X$pred.locs[,1] + X$pred.locs[,2],
-                           panel = latticeExtra::panel.levelplot.points,
-                           col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex,
-                           main = mainall[2]))
+                           main = NULL))
+  }
 
   #### Plot4 Predicted Variance
+  if(plottype == "Predicted Variance"){
   print(lattice::levelplot(X$predVar ~ X$pred.locs[,1] + X$pred.locs[,2],
                            panel = latticeExtra::panel.levelplot.points,
                            col.regions = col.regions, xlab = xlab, ylab = ylab, cex = plotcex,
-                           main = mainall[3]))
+                           main = NULL))
+  }
   }else{
     stop("Unable to Provide level Plot. Please install {latticeExtra} first!")
   }
 
   ####
+  if(plottype == "3D All"){
   if (requireNamespace("scatterplot3d", quietly = TRUE)) {
-  #### Plot5
+  #### Plot 5
+
   K1 <- length(X$obs.y)
   K2 <- nrow(X$pred.locs)
   scatterplot3d::scatterplot3d(x = locall[,1], y = locall[,2], z = Data,
@@ -398,6 +421,7 @@ plot.predgc <- function(x, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NUL
     stop("Unable to Provide Three Dimensional Plot.
          Please install {scatterplot3d} first!")
   }
+ }
 }
 
 

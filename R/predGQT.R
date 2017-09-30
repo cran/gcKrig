@@ -49,7 +49,8 @@ likGQT <- function(
 }
 
 # likGQT(pars = c(0.7,1.1,2,0.5,0.2), y = simtmp.y$data, x = cbind(1,xloc,yloc), locs = cbind(xloc,yloc),
-#        marginal = poisson.gcgc2(link = 'log'), corr = matern.gcgc2(kappa = 0.5, nugget = TRUE), effort = 1)
+#        marginal = poisson.gc(link = 'log'), corr = matern.gcgit(kappa = 0.5, nugget = TRUE),
+#        effort = 1)
 
 
 profilelikGQT <- function(
@@ -189,6 +190,7 @@ predGQT <- function(
   if(!length(pred.effort) == nrow(pred.locs))
     stop("Prediction Effort must be equal to the number of prediction locations!")
 
+
   #### First calculate the MLE and output the log-likelihood as denominator
   if(is.null(estpar)){
 
@@ -198,7 +200,6 @@ predGQT <- function(
   loglik <- MLE.est$log.lik; estpar <- MLE.est$MLE
 
   }else{
-
   loglik <- -likGQT(pars = estpar, y = obs.y, x = x, locs = obs.locs, marginal = marginal, corr = corr,
                     effort = obs.effort, longlat = longlat, distscale = distscale)
   }

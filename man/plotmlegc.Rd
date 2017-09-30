@@ -6,9 +6,9 @@ Plot Geostatistical Data and Fitted Mean
 }
 
 \usage{
-\method{plot}{mlegc}(x, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL,
-     displaymain = FALSE, pch = 20, textcex = 0.8, plotcex = 1, angle = 60,
-     col = 4, col.regions = gray(90:0/100),...)
+\method{plot}{mlegc}(x, plotdata = "Observed", plottype = "2D", xlab = "xloc", ylab = "yloc",
+     xlim = NULL, ylim = NULL, pch = 20, textcex = 0.8, plotcex = 1,
+     angle = 60, col = 4, col.regions = gray(90:0/100),...)
           }
 
 %- maybe also 'usage' for other objects documented here.
@@ -16,13 +16,15 @@ Plot Geostatistical Data and Fitted Mean
   \item{x}{an object of class \code{mlegc} inherited from function \code{\link{mlegc}}.
 }
 
+  \item{plotdata}{the data to be plotted. Can be either "Observed" if the original counts are used or
+  "Fitted" if the fitted mean at different locations are used.}
+
+  \item{plottype}{the type of the plot. Can be either "2D" for 2-D level plot or "3D" for 3-D scatterplot.}
+
   \item{xlab, ylab}{a title for the x and y axis.}
 
   \item{xlim, ylim}{numeric vectors of length 2, giving the x and y coordinates ranges.
   if they equal to \code{NULL} then they will be adjusted from the data.}
-
-  \item{displaymain}{if \code{displaymain = FALSE}, no overall title will be added to each plot.
-  If \code{displaymain = TRUE}, some titles will be added accordingly.}
 
   \item{pch}{plotting character, i.e., the symbol to use in the 3-D scatter plot.}
 
@@ -43,9 +45,8 @@ Plot Geostatistical Data and Fitted Mean
 
 }
 \description{
-Four plots will be generated. A level plot with the number of counts at given locations; a
-level plot with fitted values; a 3-D scatter plot with the original counts; a
-3-D scatter plot with fitted values.
+Four plots can be generated: the 2-D level plot or 3-D scatterplot with the number of counts or fitted values.
+
 }
 
 

@@ -8,13 +8,13 @@ Plot Geostatistical Data at Sampling and Prediction Locations
 
 
 \usage{
-\method{plot}{predgc}(x, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL,
-     displaymain = FALSE, pch = 20, textcex = 0.6, plotcex = 1,
-     angle = 60, col = c(2, 4), col.regions = gray(90:0/100),...)
+\method{plot}{predgc}(x, plottype = "2D All", xlab = "xloc", ylab = "yloc", xlim = NULL,
+     ylim = NULL, pch = 20, textcex = 0.6, plotcex = 1, angle = 60,
+     col = c(2, 4), col.regions = gray(90:0/100),...)
           }
 
 \description{
-Five plots will be generated. A level plot with the number of counts at both observed and
+Five plots can be generated. A level plot with the number of counts at both observed and
 prediction locations; a
 level plot with predicted means (intensity); a level plot with the predicted counts;
 a level plot with estimated variances of the prediction; a
@@ -25,16 +25,20 @@ a level plot with estimated variances of the prediction; a
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 
- \item{x}{an object of class \code{predgc} inherited from function \code{\link{predgc}}.
-}
+ \item{x}{an object of class \code{predgc} inherited from function \code{\link{predgc}}.}
+
+ \item{plottype}{can be one of the following: "2D All", "Predicted Counts", "Predicted Mean",
+ "Predicted Variance" or "3D All". Default is "2D All" which generates a 2-D contour plot with
+ both observed and predicted counts. With arguments "Predicted Counts", "Predicted Mean" and
+ "Predicted Variance", a 2-D level plot will be generated with the corresponding data.
+  When "3D All" is used, a 3-D scatter plot will be displayed with observed and predicted counts.
+ }
 
   \item{xlab, ylab}{a title for the x and y axis.}
 
   \item{xlim, ylim}{numeric vectors of length 2, giving the x and y coordinates ranges.
   if they equal to \code{NULL} then they will be adjusted from the data.}
 
-  \item{displaymain}{if \code{displaymain = FALSE}, no overall title will be added to each plot.
-  If \code{displaymain = TRUE}, some titles will be added accordingly.}
 
   \item{pch}{plotting character, i.e., symbol to use in the 3-D scatter plot.}
 

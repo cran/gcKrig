@@ -201,8 +201,3 @@ RcppExport SEXP ldgc(SEXP u_, SEXP R_) {
     }
     return wrap(out);
 }
-
-void R_init_gcKrig(DllInfo* info) {
-    R_registerRoutines(info, NULL, NULL, NULL, NULL);
-    R_useDynamicSymbols(info, TRUE);
-}

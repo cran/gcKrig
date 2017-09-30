@@ -35,9 +35,9 @@ The number of prediction locations equals to the number of rows.}
 \item{distscale}{a numeric scaling factor for computing distance. If original distance is in kilometers, then
 \code{distscale = 1000} will convert it to meters.}
 
-\item{marginal}{an object of class \code{\link{marginal.gc2}} specifying the marginal distribution.}
+\item{marginal}{an object of class \code{\link{marginal.gc}} specifying the marginal distribution.}
 
-\item{corr}{an object of class \code{\link{corr.gc2}} specifying the correlation function.}
+\item{corr}{an object of class \code{\link{corr.gc}} specifying the correlation function.}
 
 \item{obs.effort}{sampling effort at observed locations.
 For binomial marginal it is the size parameter (number of trials). See details.}
@@ -50,8 +50,11 @@ For binomial marginal it is the size parameter (number of trials). See details.}
 \code{method = 'GQT'} then the maximum surrogate likelihood estimates are computed.}
 
 \item{estpar}{if \code{estpar = NULL} then the likelihood estimates
-will be computed first, then plug-in into the predictive density. If estimates are obtained
-from the previous analysis, it is suggested to specify \code{estpar} with the parameter estimates.
+will be computed first, then plug-in into the predictive density.
+When all estimates are available,
+it is suggested to specify \code{estpar} with the parameter estimates so
+re-fitting is not needed. If so, the sequence of the
+input values for \code{estpar} is: regression parameters, overdispersion (if any), and correlation parameters (range and nugget, if applicable).
 }
 
 \item{corrpar0}{the starting value of correlation parameters in optimization procedure.
@@ -132,8 +135,8 @@ weedobs <- Weed95[Weed95$dummy==1, ]
 weedpred <- Weed95[Weed95$dummy==0, ]
 predweed1 <- predgc(obs.y = weedobs$weedcount, obs.x = weedobs[,4:5], obs.locs = weedobs[,1:2],
                      pred.x = weedpred[1:4,4:5], pred.locs = weedpred[1:4,1:2],
-                     marginal = negbin.gc2(link = 'log'), pred.interval = 0.9,
-                     corr = matern.gc2(kappa = 0.5, nugget = TRUE), method = 'GHK')
+                     marginal = negbin.gc(link = 'log'), pred.interval = 0.9,
+                     corr = matern.gc(kappa = 0.5, nugget = TRUE), method = 'GHK')
 #summary(predweed1)
 #plot(predweed1)
 
@@ -141,8 +144,8 @@ predweed1 <- predgc(obs.y = weedobs$weedcount, obs.x = weedobs[,4:5], obs.locs =
 ## Weed prediction at 200 locations using parallel programming
 predweed2 <- predgc(obs.y = weedobs$weedcount, obs.x = weedobs[,4:5], obs.locs = weedobs[,1:2],
                      pred.x = weedpred[,4:5], pred.locs = weedpred[,1:2],
-                     marginal = negbin.gc2(link = 'log'),
-                     corr = matern.gc2(kappa = 0.5, nugget = TRUE), method = 'GHK',
+                     marginal = negbin.gc(link = 'log'),
+                     corr = matern.gc(kappa = 0.5, nugget = TRUE), method = 'GHK',
                      pred.interval = 0.95, parallel = TRUE,
                      paralleloptions = list(n.cores = 4))
 #summary(predweed2)
@@ -155,8 +158,8 @@ gridstep <- seq(0.5, 30.5, length = 40)
 locOilpred <- data.frame(Easting = expand.grid(gridstep, gridstep)[,1],
                         Northing = expand.grid(gridstep, gridstep)[,2])
 PredOil <- predgc(obs.y = OilWell[,3], obs.locs = OilWell[,1:2],  pred.locs = locOilpred,
-                       marginal = binomial.gc2(link = 'logit'),
-                       corr = matern.gc2(nugget = FALSE), obs.effort = 1,
+                       marginal = binomial.gc(link = 'logit'),
+                       corr = matern.gc(nugget = FALSE), obs.effort = 1,
                        pred.effort = 1, method = 'GHK',
                        parallel = TRUE, paralleloptions = list(n.cores = 4))
 PredMat <- summary(PredOil)

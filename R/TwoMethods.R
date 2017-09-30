@@ -6,8 +6,9 @@ mlegc <- function(y, x = NULL, locs, marginal, corr, effort = 1, longlat = FALSE
   if (!method %in% c("GQT", "GHK"))
     stop("'method' must be GQT or GHK.")
 
-  if(!inherits(marginal, "marginal.gc2"))  stop("'marginal' must be a function of the class marginal.gc2")
-  if(!inherits(corr, "corr.gc2")) stop("'corr' must be a function of the class corr.gc2")
+  if(!inherits(marginal, "marginal.gc"))  stop("'marginal' must be a function of the class marginal.gc")
+  if(!inherits(corr, "corr.gc")) stop("'corr' must be a function of the class corr.gc")
+  if(!isTRUE(marginal$discrete)) stop("marginals must be discrete")
 
   if (requireNamespace("numDeriv", quietly = TRUE)){
     if(method == 'GHK'){
@@ -78,6 +79,18 @@ predgc <- function(obs.y, obs.x = NULL, obs.locs, pred.x = NULL, pred.locs, long
 {
   if (!method %in% c("GQT", "GHK"))
     stop("'method' must be GQT or GHK.")
+  if(!isTRUE(marginal$discrete)) stop("marginals must be discrete")
+
+
+  nreg <- ncol(pred.x)+1
+  nod <- marginal$nod
+  ncorr <- corr$npar.cor
+  Nestpar <- nreg + nod + ncorr
+
+  if(!is.null(estpar)){
+    if(length(estpar)!= Nestpar)
+     stop("Number of the given parameter estimates does not match the model requirement, please check!")
+  }
 
   if(parallel == FALSE & method == 'GHK'){
     answer <- predGHK(obs.y = obs.y, obs.x = obs.x, obs.locs = obs.locs, pred.x = pred.x, pred.locs = pred.locs,

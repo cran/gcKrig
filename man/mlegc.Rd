@@ -18,9 +18,9 @@ If no covariates then \code{x = NULL}.}
 The first column is \emph{x} or longitude, the second column is \emph{y} or latitude.
 The number of locations is equal to the number of rows.}
 
-\item{marginal}{an object of class \code{\link{marginal.gc2}} specifying the marginal distribution.}
+\item{marginal}{an object of class \code{\link{marginal.gc}} specifying the marginal distribution.}
 
-\item{corr}{an object of class \code{\link{corr.gc2}} specifying the correlation function.}
+\item{corr}{an object of class \code{\link{corr.gc}} specifying the correlation function.}
 
 \item{effort}{the sampling effort. For binomial marginal it is the size parameter (number of trials).
 See details.}
@@ -97,16 +97,16 @@ yloc <- expand.grid(x = grid, y = grid)[,2]
 
 set.seed(123)
 simData1 <- simgc(locs = cbind(xloc,yloc), sim.n = 1,
-                    marginal = negbin.gc1(mu = exp(1+xloc), od = 1),
-                    corr = matern.gc1(range = 0.4, kappa = 0.5, nugget = 0))
+                    marginal = negbin.gc(mu = exp(1+xloc), od = 1),
+                    corr = matern.gc(range = 0.4, kappa = 0.5, nugget = 0))
 
 simFit1 <- mlegc(y = simData1$data, x = xloc, locs = cbind(xloc,yloc),
-                 marginal = negbin.gc2(link = 'log'),
-                 corr = matern.gc2(kappa = 0.5, nugget = FALSE), method = 'GHK')
+                 marginal = negbin.gc(link = 'log'),
+                 corr = matern.gc(kappa = 0.5, nugget = FALSE), method = 'GHK')
 
 simFit2 <- mlegc(y = simData1$data, x = xloc, locs = cbind(xloc,yloc),
-                 marginal = negbin.gc2(link = 'log'),
-                 corr = matern.gc2(kappa = 0.5, nugget = FALSE), method = 'GQT')
+                 marginal = negbin.gc(link = 'log'),
+                 corr = matern.gc(kappa = 0.5, nugget = FALSE), method = 'GQT')
 #summary(simFit1);summary(simFit2)
 #plot(simFit1);plot(simFit2)
 
@@ -118,8 +118,8 @@ data(Weed95)
 weedobs <- Weed95[Weed95$dummy==1, ]
 weedpred <- Weed95[Weed95$dummy==0, ]
 Weedfit1 <- mlegc(y = weedobs$weedcount, x = weedobs[,4:5], locs = weedobs[,1:2],
-                     marginal = poisson.gc2(link='log'),
-                     corr = matern.gc2(kappa = 0.5, nugget = TRUE),
+                     marginal = poisson.gc(link='log'),
+                     corr = matern.gc(kappa = 0.5, nugget = TRUE),
                      method = 'GHK')
 summary(Weedfit1)
 plot(Weedfit1)
@@ -128,23 +128,23 @@ plot(Weedfit1)
 ## Fit a real dataset with 256 locations
 data(LansingTrees)
 Treefit1 <- mlegc(y = LansingTrees[,3], x = LansingTrees[,4], locs = LansingTrees[,1:2],
-                  marginal = negbin.gc2(link = 'log'),
-                  corr = matern.gc2(kappa = 0.5, nugget = FALSE), method = 'GHK')
+                  marginal = negbin.gc(link = 'log'),
+                  corr = matern.gc(kappa = 0.5, nugget = FALSE), method = 'GHK')
 summary(Treefit1)
 plot(Treefit1)
 
 # Try to use GQT method
 Treefit2<- mlegc(y = LansingTrees[,3], x = LansingTrees[,4],
-                locs = LansingTrees[,1:2], marginal = poisson.gc2(link='log'),
-                corr = matern.gc2(kappa = 0.5, nugget = TRUE), method = 'GQT')
+                locs = LansingTrees[,1:2], marginal = poisson.gc(link='log'),
+                corr = matern.gc(kappa = 0.5, nugget = TRUE), method = 'GQT')
 summary(Treefit2)
 plot(Treefit2)
 
 ## Fit a real dataset with randomized locations
 data(AtlanticFish)
 Fitfish <- mlegc(y = AtlanticFish[,3], x = AtlanticFish[,4:6], locs = AtlanticFish[,1:2],
-                   longlat = TRUE, marginal = negbin.gc2(link='log'),
-                   corr = matern.gc2(kappa = 0.5, nugget = TRUE), method = 'GHK')
+                   longlat = TRUE, marginal = negbin.gc(link='log'),
+                   corr = matern.gc(kappa = 0.5, nugget = TRUE), method = 'GHK')
 summary(Fitfish)
 
 ## Fit a real dataset with binomial counts; see Masarotto and Varin (2016).
@@ -154,8 +154,8 @@ malariax <- data.frame(netuse = malaria$netuse,
                        green = malaria$green/100,
                        phc = malaria$phc)
 Fitmalaria <- mlegc(y = malaria$cases, x = malariax, locs = malaria[,1:2],
-                    marginal = binomial.gc2(link='logit'), corrpar0 = 1.5, 
-                    corr = matern.gc2(kappa = 0.5, nugget = FALSE),
+                    marginal = binomial.gc(link='logit'), corrpar0 = 1.5,
+                    corr = matern.gc(kappa = 0.5, nugget = FALSE),
                     distscale = 0.001, effort = malaria$size, method = 'GHK')
 summary(Fitmalaria)
 
@@ -163,8 +163,8 @@ summary(Fitmalaria)
 ## Fit a real spatial binary dataset with 333 locations using probit link
 data(OilWell)
 Oilest1 <- mlegc(y = OilWell[,3], x = NULL, locs = OilWell[,1:2],
-                 marginal = binomial.gc2(link = 'probit'),
-                 corr = matern.gc2(nugget = TRUE), method = 'GHK')
+                 marginal = binomial.gc(link = 'probit'),
+                 corr = matern.gc(nugget = TRUE), method = 'GHK')
 summary(Oilest1)
 plot(Oilest1, col = 2)
 }

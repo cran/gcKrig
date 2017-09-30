@@ -6,9 +6,9 @@ Plot Geostatistical Data Simulated From Gaussian Copula
 }
 
 \usage{
-\method{plot}{simgc}(x, index = 1, xlab = "xloc", ylab = "yloc", xlim = NULL, ylim = NULL,
-     pch = 20, textcex = 0.8, plotcex = 1, angle = 60, col = 4,
-     col.regions = gray(90:0/100),...)
+\method{plot}{simgc}(x, index = 1, plottype = "Text", xlab = "xloc", ylab = "yloc",
+     xlim = NULL, ylim = NULL, pch = 20, textcex = 0.8, plotcex = 1,
+     angle = 60, col = 4, col.regions = gray(90:0/100),...)
           }
 
 \description{
@@ -22,6 +22,10 @@ level plot with point referenced locations and varying colors and a 3-D scatter 
 
   \item{index}{the index of the simulated data, need to be specified since \code{simgc} can
   simulate multiple datasets simultaneously.}
+
+  \item{plottype}{the type of the printed plot, can be "Text", "Dot", or "3D". When plottype =
+  "Text", a 2-D plot is generated with exact counts at observed locations. When plottype =
+  "Dot", a 2-D dot plot is generated and when plottype = "3D" a 3-D scatter plot is printed.}
 
   \item{xlab, ylab}{a title for the x and y axis.}
 

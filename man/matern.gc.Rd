@@ -1,9 +1,9 @@
 
-\name{matern.gc1}
-\alias{matern.gc1}
-\title{The Matern Correlation Function of Class \code{\link{corr.gc1}}}
+\name{matern.gc}
+\alias{matern.gc}
+\title{The Matern Correlation Function of Class \code{\link{corr.gc}}}
 \usage{
-matern.gc1(range = 0, kappa = 0.5, nugget = 0)
+matern.gc(range = NULL, kappa = 0.5, nugget = TRUE)
 }
 \arguments{
 \item{range}{a non-negative scalar of the range parameter in Matern correlation function.}
@@ -11,14 +11,23 @@ matern.gc1(range = 0, kappa = 0.5, nugget = 0)
 \item{kappa}{a non-negative scalar of the shape parameter in the Matern correlation function.
 The default kappa = 0.5 corresponds to an exponential correlation model.}
 
-\item{nugget}{the nugget effect of the correlation function. A scalar between 0 and 1.}
+\item{nugget}{the nugget effect of the correlation function. If specified, it must be a scalar between 0 and 1.}
 }
 \value{
-An object of class \code{\link{corr.gc1}} representing the correlation component.
+An object of class \code{\link{corr.gc}} representing the correlation component.
 }
 \description{
-The Matern correlation function used for simulating geostatistical data
- from Gaussian copula models.
+The Matern correlation function in spatial statistics.
+
+By default, range parameter is not available, so
+this function is used for likelihood inference and spatial prediction in function \code{mlegc}
+and \code{predgc}.
+Users need to specify the shape parameter \code{kappa} and if the correlation model includes a nugget effect
+\code{nugget = TRUE} or not \code{nugget = FALSE}.
+
+When both range and nugget parameters are given,
+the function is used for simulation with function \code{simgc} in package \code{gcKrig}.
+
 }
 \details{
 The Matern correlation function with a nugget \eqn{\tau^2} is of the form:
@@ -42,7 +51,7 @@ Zifei Han \email{hanzifei1@gmail.com}
 Diggle, P. and Ribeiro, P.J. (2007) Model-based Geostatistics. \emph{Springer}.
 }
 \seealso{
-\code{\link{powerexp.gc1}},  \code{\link{spherical.gc1}}
+\code{\link{powerexp.gc}},  \code{\link{spherical.gc}}
 }
 
 \keyword{Correlation}% use one of  RShowDoc("KEYWORDS")

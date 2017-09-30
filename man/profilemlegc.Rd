@@ -72,8 +72,8 @@ Zifei Han \email{hanzifei1@gmail.com}
 \dontrun{
 data(LansingTrees)
 Treefit4 <- mlegc(y = LansingTrees[,3], x = LansingTrees[,4],
-                    locs = LansingTrees[,1:2], marginal = zip.gc2(link = 'log'),
-                    corr = matern.gc2(kappa = 0.5, nugget = TRUE), method = 'GHK')
+                    locs = LansingTrees[,1:2], marginal = zip.gc(link = 'log'),
+                    corr = matern.gc(kappa = 0.5, nugget = TRUE), method = 'GHK')
 summary(Treefit4)
 
 profile(Treefit4, 1, 0.05,  method = 'GHK', nrep = 1000, seed = 12345)

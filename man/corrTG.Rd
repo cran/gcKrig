@@ -3,7 +3,7 @@
 \alias{corrTG}
 \title{Compute the Correlation in  Transformed Gaussian Random Fields}
 \usage{
-corrTG(marg1, marg2, corrGaus = 0.5, method = "integral", nrep = 1000)
+corrTG(marg1, marg2, corrGauss = 0.5, method = "integral", nrep = 1000)
 }
 
 \description{
@@ -13,11 +13,11 @@ corrTG(marg1, marg2, corrGaus = 0.5, method = "integral", nrep = 1000)
 
 
 \arguments{
-\item{marg1}{an object of class \code{\link{marginal.gc1}} specifying the first marginal distribution.}
+\item{marg1}{an object of class \code{\link{marginal.gc}} specifying the first marginal distribution.}
 
-\item{marg2}{an object of class \code{\link{marginal.gc1}} specifying the second marginal distribution.}
+\item{marg2}{an object of class \code{\link{marginal.gc}} specifying the second marginal distribution.}
 
-\item{corrGaus}{the correlation in the Gaussian random field. Should be a scalar between 0 and 1.}
+\item{corrGauss}{the correlation in the Gaussian random field. Should be a scalar between 0 and 1.}
 
 \item{method}{the computation method of calculating correlation in the transformed Gaussian random field.
 Can be either "integral" or "mc".
@@ -32,11 +32,11 @@ A scalar between 0 and 1, denoting the correlation of the transformed Gaussian r
 }
 \examples{
 \dontrun{
-corrTG(marg1 = poisson.gc1(lambda = 10), marg2 = binomial.gc1(size = 1, prob = 0.1),
-       corrGaus = 0.5, method = "integral")
+corrTG(marg1 = poisson.gc(lambda = 10), marg2 = binomial.gc(size = 1, prob = 0.1),
+       corrGauss = 0.5, method = "integral")
 set.seed(12345)
-corrTG(marg1 = poisson.gc1(lambda = 10), marg2 = binomial.gc1(size = 1, prob = 0.1),
-       corrGaus = 0.5, nrep = 100000, method = "mc")
+corrTG(marg1 = poisson.gc(lambda = 10), marg2 = binomial.gc(size = 1, prob = 0.1),
+       corrGauss = 0.5, nrep = 100000, method = "mc")
 }
 }
 \author{

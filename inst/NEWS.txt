@@ -4,3 +4,12 @@ Version 1.0.2
 - add function plotgc for a general geostatistical plot
 - bugs fixed
 
+
+
+Version 1.1.0
+-------------
+- Combine classes marginal.gc1 and marginal.gc2
+- Combine classes corr.gc1 and corr.gc2
+- Now specifying marginals and correlations in simulation and fitting are united
+- bugs fixed in plotting the simulated data
+- Documentations changed accordingly

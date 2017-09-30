@@ -107,29 +107,29 @@ FHUBdiscrete <- function(marg1, marg2, mu1, mu2, od1 = 0, od2 = 0,
 
 
 
-corrTG <- function(marg1, marg2, corrGaus = 0.5, method = "integral", nrep = 1000){
+corrTG <- function(marg1, marg2, corrGauss = 0.5, method = "integral", nrep = 1000){
 
- if(!inherits(marg1, "marginal.gc1"))  stop("'marg1' must be a function of the class marginal.gc1")
- if(!inherits(marg2, "marginal.gc1")) stop("'marg2' must be a function of the class marginal.gc1")
+ if(!inherits(marg1, "marginal.gc"))  stop("'marg1' must be a function of the class marginal.gc")
+ if(!inherits(marg2, "marginal.gc")) stop("'marg2' must be a function of the class marginal.gc")
 
   atmp <- rep(0,50)
   if(method == "integral"){
     for(u in 1:50){
-      atmp[u] = marg1$int.marg(order = u)[[1]]*marg2$int.marg(order = u)[[1]]*(corrGaus)^(u)/factorial(u)
+      atmp[u] = marg1$int.marg(order = u)[[1]]*marg2$int.marg(order = u)[[1]]*(corrGauss)^(u)/factorial(u)
       if (abs(atmp[u]) < .Machine$double.eps^0.5*sqrt(marg1$margvar*marg2$margvar) )
         break
     }
     corr <- sum(atmp)/sqrt(marg1$margvar*marg2$margvar)
   }
 
-  if(method == "mc" & corrGaus == 1){
+  if(method == "mc" & corrGauss == 1){
     corr <- cor(sort(marg1$rsample(nrep = nrep)), sort(marg2$rsample(nrep = nrep)))
   }
 
-  if(method == "mc" & corrGaus < 1){
+  if(method == "mc" & corrGauss < 1){
     if (requireNamespace("MASS", quietly = TRUE)) {
             simnorm = pnorm(MASS::mvrnorm(nrep, mu = c(0,0),
-                                          Sigma = matrix(c(1,corrGaus,corrGaus,1),2,2)))
+                                          Sigma = matrix(c(1,corrGauss,corrGauss,1),2,2)))
     }else{
       stop("Please install {MASS} first!")
     }

@@ -1,22 +1,28 @@
 
-\name{zip.gc1}
-\alias{zip.gc1}
-\title{The Zero-inflated Poisson Marginal of Class \code{\link{marginal.gc1}}}
+\name{zip.gc}
+\alias{zip.gc}
+\title{The Zero-inflated Poisson Marginal of Class \code{\link{marginal.gc}}}
 \usage{
-zip.gc1(mu = 1, od = 1)
+zip.gc(link = "log", mu = NULL, od = NULL)
 }
 \arguments{
+\item{link}{the model link function.}
+
 \item{mu}{a non-negative scalar of the mean parameter.}
 
 \item{od}{a non-negative scalar of the overdispersion parameter.}
 }
 \value{
-An object of class \code{\link{marginal.gc1}} representing the marginal component.
+An object of class \code{\link{marginal.gc}} representing the marginal component.
 }
 
 \description{
-The zero-inflated Poisson marginal used for simulation and computing
-correlation in trans-Gaussian random field, parameterized in terms of the mean and overdispersion.
+The zero-inflated Poisson marginal parameterized in terms of its mean and overdispersion.
+
+By default, this function is used for likelihood inference and spatial prediction in function
+\code{mlegc} and \code{predgc} of the package \code{gcKrig}.
+When all marginal parameters are given, the function is used for simulation and computing correlation in a
+trans-Gaussian random field in function \code{simgc} and \code{corrTG}.
 }
 
 \details{
@@ -45,10 +51,10 @@ Han, Z. and De Oliveira, V. (2016) On the correlation structure of Gaussian
 }
 
 \seealso{
-\code{\link{marginal.gc1}},  \code{\link{beta.gc1}}, \code{\link{binomial.gc1}},
-           \code{\link{gm.gc1}}, \code{\link{gaussian.gc1}},
-           \code{\link{negbin.gc1}}, \code{\link{poisson.gc1}},
-          \code{\link{weibull.gc1}}
+\code{\link{marginal.gc}},  \code{\link{beta.gc}}, \code{\link{binomial.gc}},
+           \code{\link{gm.gc}}, \code{\link{gaussian.gc}},
+           \code{\link{negbin.gc}}, \code{\link{poisson.gc}},
+          \code{\link{weibull.gc}}
 }
 
 \keyword{Marginal}
