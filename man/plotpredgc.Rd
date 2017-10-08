@@ -8,7 +8,7 @@ Plot Geostatistical Data at Sampling and Prediction Locations
 
 
 \usage{
-\method{plot}{predgc}(x, plottype = "2D All", xlab = "xloc", ylab = "yloc", xlim = NULL,
+\method{plot}{predgc}(x, plottype = "2D", xlab = "xloc", ylab = "yloc", xlim = NULL,
      ylim = NULL, pch = 20, textcex = 0.6, plotcex = 1, angle = 60,
      col = c(2, 4), col.regions = gray(90:0/100),...)
           }
@@ -27,11 +27,11 @@ a level plot with estimated variances of the prediction; a
 
  \item{x}{an object of class \code{predgc} inherited from function \code{\link{predgc}}.}
 
- \item{plottype}{can be one of the following: "2D All", "Predicted Counts", "Predicted Mean",
- "Predicted Variance" or "3D All". Default is "2D All" which generates a 2-D contour plot with
+ \item{plottype}{can be one of the following: "2D", "Predicted Counts", "Predicted Mean",
+ "Predicted Variance" or "3D". Default is "2D" which generates a 2-D contour plot with
  both observed and predicted counts. With arguments "Predicted Counts", "Predicted Mean" and
  "Predicted Variance", a 2-D level plot will be generated with the corresponding data.
-  When "3D All" is used, a 3-D scatter plot will be displayed with observed and predicted counts.
+  When "3D" is used, a 3-D scatter plot will be displayed with observed and predicted counts.
  }
 
   \item{xlab, ylab}{a title for the x and y axis.}

@@ -1,7 +1,7 @@
-6ac965d86adcc6678dc2086d052c3c05 *DESCRIPTION
+e758404d2860a71300df8af943d32f95 *DESCRIPTION
 994827a7f96ae83d82df290caa5c9617 *NAMESPACE
 d87770e71f8b2564290a0e20621cbce6 *R/Plotgc.R
-9b5932e40b4ca7d30079136b7adb7a94 *R/S3Methods.R
+a2c9486864563555d2708789365db413 *R/S3Methods.R
 9141f12dd2ffb1c949a5cb8fbab64051 *R/TwoMethods.R
 ccea1d8b3ff2bee4dde7d557c1ff9f64 *R/gcClass.R
 30ff66061d3062b765f53192753fce50 *R/mvnintGHK.R
@@ -31,7 +31,7 @@ bf699185a5b41619e2ed00aa11f094ec *man/matern.gc.Rd
 79b911b3946dd45dc4f7ae75a83e1f71 *man/mvnintGHK.Rd
 ef3d02280fc4aff72c5083eecf8b8d29 *man/negbin.gc.Rd
 9a04a962e08adadc2ff2d78eb4122cef *man/plotmlegc.Rd
-436bd69514916428bfa6ac5d483c0b0f *man/plotpredgc.Rd
+c0f893330255e146cb5a87996cfebaec *man/plotpredgc.Rd
 d989aad46570e80a2ccd97c3768736d7 *man/plotsimgc.Rd
 50de049724be9792a66f0bf3b33f0932 *man/poisson.gc.Rd
 8e140e897d8ce4a457e6afd6c4d1973d *man/powerexp.gc.Rd

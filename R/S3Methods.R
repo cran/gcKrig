@@ -347,11 +347,11 @@ print.summary.mlegc <- function(x, digits = max(3, getOption("digits") - 3), ...
 
 #### S3 Method on prediction results --------------------------------------------------------------------
 #### ----------------------------------------------------------------------------------------------------
-plot.predgc <- function(x, plottype = "2D All", xlab = "xloc", ylab = "yloc",
+plot.predgc <- function(x, plottype = "2D", xlab = "xloc", ylab = "yloc",
                         xlim = NULL, ylim = NULL, pch = 20, textcex = 0.6, plotcex = 1,
                         angle = 60, col = c(2, 4), col.regions = gray(90:0/100),...)
 {
-# 2D All; Predicted Counts; Predicted Means; Predicted Variance; 3D All
+# 2D; Predicted Counts; Predicted Means; Predicted Variance; 3D
 
   X <- x
   rm(x)
@@ -364,7 +364,7 @@ plot.predgc <- function(x, plottype = "2D All", xlab = "xloc", ylab = "yloc",
   if (requireNamespace("latticeExtra", quietly = TRUE)) {
  ####  Plot1
 
-  if(plottype == "2D All"){
+  if(plottype == "2D"){
   print(lattice::levelplot(Data ~ locall[,1] + locall[,2], col.regions = col.regions,
                            xlab = xlab, ylab = ylab, cex = plotcex, main = NULL,
                            panel = function(...) {
@@ -406,7 +406,7 @@ plot.predgc <- function(x, plottype = "2D All", xlab = "xloc", ylab = "yloc",
   }
 
   ####
-  if(plottype == "3D All"){
+  if(plottype == "3D"){
   if (requireNamespace("scatterplot3d", quietly = TRUE)) {
   #### Plot 5
 
