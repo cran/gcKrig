@@ -48,7 +48,7 @@ poisson.gc <- function(link = "log", lambda = NULL){
   }
   ans$fm <- fm
   }
-  if(is.numeric(lambda) & lambda > 0){
+  if(is.numeric(lambda)){
   q <- function(p) qpois(p = p, lambda = lambda)
   ans$margvar <- lambda
   ans$int.marg <- function (order) {

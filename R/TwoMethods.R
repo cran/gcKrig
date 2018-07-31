@@ -17,7 +17,7 @@ mlegc <- function(y, x = NULL, locs, marginal, corr, effort = 1, longlat = FALSE
       if(is.null(ghkoptions[["nrep"]])) ghkoptions$nrep = c(100,1000)
       if(is.null(ghkoptions[["reorder"]])) ghkoptions$reorder = FALSE
       if(is.null(ghkoptions[["seed"]])) ghkoptions$seed = 12345
-
+      y <- c(y)
       answer <- mleGHK(y = y, x = x, locs = locs, marginal = marginal, corr = corr, effort = effort,
                        longlat = longlat, distscale = distscale, corrpar0 = corrpar0, ghkoptions = ghkoptions)
 

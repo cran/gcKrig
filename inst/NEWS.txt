@@ -13,3 +13,14 @@ Version 1.1.0
 - Now specifying marginals and correlations in simulation and fitting are united
 - bugs fixed in plotting the simulated data
 - Documentations changed accordingly
+
+
+Version 1.1.1
+-------------
+- bugs fixed when range parameter fit is 0
+
+
+Version 1.1.2
+-------------
+- bugs fixed when fitting Poisson marginal
+- Documentations changed accordingly

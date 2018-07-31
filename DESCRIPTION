@@ -1,7 +1,7 @@
 Package: gcKrig
 Type: Package
 Title: Analysis of Geostatistical Count Data using Gaussian Copulas
-Version: 1.1.1
+Version: 1.1.2
 Author: Zifei Han
 Maintainer: Zifei Han <hanzifei1@gmail.com>
 Description: Provides a variety of functions to analyze and model
@@ -18,6 +18,6 @@ LinkingTo: Rcpp, RcppArmadillo
 Suggests: EQL, FNN, lattice, latticeExtra, Matrix, MASS, numDeriv,
         scatterplot3d, snowfall, sp
 NeedsCompilation: yes
-Packaged: 2017-10-08 21:06:09 UTC; zifeihan
+Packaged: 2018-07-21 22:46:39 UTC; zifeihan
 Repository: CRAN
-Date/Publication: 2017-10-08 21:42:47 UTC
+Date/Publication: 2018-07-31 15:00:03 UTC

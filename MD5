@@ -1,9 +1,9 @@
-e758404d2860a71300df8af943d32f95 *DESCRIPTION
+5f9a9c614edcc33a668088dfb1027507 *DESCRIPTION
 994827a7f96ae83d82df290caa5c9617 *NAMESPACE
 d87770e71f8b2564290a0e20621cbce6 *R/Plotgc.R
 a2c9486864563555d2708789365db413 *R/S3Methods.R
-9141f12dd2ffb1c949a5cb8fbab64051 *R/TwoMethods.R
-ccea1d8b3ff2bee4dde7d557c1ff9f64 *R/gcClass.R
+fc830431fb5316d48047dabb70b0d65f *R/TwoMethods.R
+8afde4af9d6bf74d742538618add1aa9 *R/gcClass.R
 30ff66061d3062b765f53192753fce50 *R/mvnintGHK.R
 16318cd03e011b3bcb6e9ab1d2386fdb *R/predGHK.R
 6cfdc2d3c6237df45e1ae7cc8e5f8374 *R/predGQT.R
@@ -12,7 +12,7 @@ ccea1d8b3ff2bee4dde7d557c1ff9f64 *R/gcClass.R
 e65ee87c7cd2f3e21a10d956797a5a45 *data/LansingTrees.RData
 9f2118e903a7e773cfbf3503856e7efe *data/OilWell.RData
 21e80a0c939e2aa4b91dcd3c985c5bee *data/Weed95.RData
-44e1d5405dc9edfd3400b3b605d21c9f *inst/NEWS.txt
+befedf2de30a53c27143045fdee6fce9 *inst/NEWS.txt
 36e0223e9e0691c331e256c84d308c88 *man/AtlanticFish.Rd
 b7363575b2ba0b8565f9906b2f13605a *man/FHUBdiscrete.Rd
 23a2fbbc0fb857a38bc4562b4f4ab175 *man/LansingTrees.Rd
