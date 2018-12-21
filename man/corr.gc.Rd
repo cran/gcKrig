@@ -41,6 +41,15 @@ Zifei Han \email{hanzifei1@gmail.com}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
+\references{
+De Oliveira, V. (2013) Hierarchical Poisson models for spatial count data.
+             \emph{Journal of Multivariate Analysis,122:393-408}.
+
+Han, Z. and De Oliveira, V. (2018) gcKrig: An R Package for the Analysis of Geostatistical Count Data Using Gaussian Copulas.
+\emph{Journal of Statistical Software}, \bold{87}(13), 1--32. \doi{10.18637/jss.v087.i13}.
+
+}
+
 \seealso{
          \code{\link{matern.gc}},
          \code{\link{powerexp.gc}},

@@ -63,9 +63,13 @@ Zifei Han \email{hanzifei1@gmail.com}
 Nelsen, R. (1987) Discrete bivariate distributions with given marginals and correlation.
              \emph{Communications in Statistics Simulation and Computation, 16:199-208}.
 
-            Han, Z. and De Oliveira, V. (2016) On the correlation structure of Gaussian
-            copula models for geostatistical count data.
-            \emph{Australian and New Zealand Journal of Statistics, 58:47-69}.
+ Han, Z. and De Oliveira, V. (2016) On the correlation structure of Gaussian
+copula models for geostatistical count data.
+ \emph{Australian and New Zealand Journal of Statistics, 58:47-69}.
+
+Han, Z. and De Oliveira, V. (2018) gcKrig: An R Package for the Analysis of Geostatistical Count Data Using Gaussian Copulas.
+\emph{Journal of Statistical Software}, \bold{87}(13), 1--32. \doi{10.18637/jss.v087.i13}.
+
 }
 
 \keyword{Correlation Structure}

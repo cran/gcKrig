@@ -66,8 +66,12 @@ Masarotto, G. and Varin, C. (2012) Gaussian copula marginal regression.
 \emph{Electronic Journal of Statistics, 6:1517-1549}.
 \url{https://projecteuclid.org/euclid.ejs/1346421603}.
 
-Masarotto, G. and Varin, C. (2016) Gaussian Copula Regression in R. \emph{Journal of Statistical Software, To appear}.
-\url{http://cristianovarin.weebly.com/uploads/1/5/1/5/15156956/masarotto_varin_gcmr-vignette.pdf}.
+Masarotto, G. and Varin C. (2017) Gaussian Copula Regression in R.
+\emph{Journal of Statistical Software}, \bold{77}(8), 1--26. \doi{10.18637/jss.v077.i08}.
+
+Han, Z. and De Oliveira, V. (2018) gcKrig: An R Package for the Analysis of Geostatistical Count Data Using Gaussian Copulas.
+\emph{Journal of Statistical Software}, \bold{87}(13), 1--32. \doi{10.18637/jss.v087.i13}.
+
 }
 
 
