@@ -29,3 +29,6 @@ Version 1.1.3
 -------------
 - update citation information
 
+Version 1.1.4
+- update to fix an error when prediction with given parameters
+

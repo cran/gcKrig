@@ -81,8 +81,11 @@ predgc <- function(obs.y, obs.x = NULL, obs.locs, pred.x = NULL, pred.locs, long
     stop("'method' must be GQT or GHK.")
   if(!isTRUE(marginal$discrete)) stop("marginals must be discrete")
 
-
-  nreg <- ncol(pred.x)+1
+  if(is.null(pred.x)){
+    nreg = 1
+    }else{
+    nreg <- ncol(pred.x)+1
+    }
   nod <- marginal$nod
   ncorr <- corr$npar.cor
   Nestpar <- nreg + nod + ncorr
