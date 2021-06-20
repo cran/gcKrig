@@ -1,4 +1,4 @@
-e5a64acb4c335bf29a3392cfe0edd4ad *DESCRIPTION
+7366d749d0ed471fdb365ca042202dc3 *DESCRIPTION
 994827a7f96ae83d82df290caa5c9617 *NAMESPACE
 d87770e71f8b2564290a0e20621cbce6 *R/Plotgc.R
 a2c9486864563555d2708789365db413 *R/S3Methods.R
@@ -8,14 +8,14 @@ a2c9486864563555d2708789365db413 *R/S3Methods.R
 16318cd03e011b3bcb6e9ab1d2386fdb *R/predGHK.R
 6cfdc2d3c6237df45e1ae7cc8e5f8374 *R/predGQT.R
 58e40393f9ee56720c411f28d7026a6e *R/simFHUB.R
-18a37035c20038c25e29f62fd2d02d6a *build/partial.rdb
+d0ae26f6c5f9f0a443e682e68d4fb8be *build/partial.rdb
 1b01c1a618ec5bc9db5323da9b6d8c2f *data/AtlanticFish.RData
 e65ee87c7cd2f3e21a10d956797a5a45 *data/LansingTrees.RData
 9f2118e903a7e773cfbf3503856e7efe *data/OilWell.RData
 21e80a0c939e2aa4b91dcd3c985c5bee *data/Weed95.RData
 1e2aa57f42a8a202f79364ac248c50c2 *inst/CITATION
-718fc67cfbf2de4a7a552e0f1b030cf7 *inst/NEWS.txt
-36e0223e9e0691c331e256c84d308c88 *man/AtlanticFish.Rd
+211b5f43f8d63aeb1f8243b27f9ede7e *inst/NEWS.txt
+d3c3cffa6bbfa77d97aac6e968663291 *man/AtlanticFish.Rd
 43a69ba766e767993185e12ae98783cf *man/FHUBdiscrete.Rd
 23a2fbbc0fb857a38bc4562b4f4ab175 *man/LansingTrees.Rd
 f1273b86976a7306a6aa2f16e273867c *man/OilWell.Rd
@@ -27,7 +27,7 @@ ca946f31d342abbea578724dacbfdb2e *man/beta.gc.Rd
 f851cdefd76c77409093d5662ad1ba8e *man/corrTG.Rd
 f3b8cea21647ac4f809135fb8de0dda1 *man/gamma.gc.Rd
 011583695a3fe6ad639c7f172ce9487a *man/gaussian.gc.Rd
-2a26e0da7e09fd473022a177ec4e96c1 *man/marginal.gc.Rd
+62dba7c2c5ee62f7d19fff6485858ae4 *man/marginal.gc.Rd
 bf699185a5b41619e2ed00aa11f094ec *man/matern.gc.Rd
 e1298f8971e4dc4d52baf3a686152818 *man/mlegc.Rd
 79b911b3946dd45dc4f7ae75a83e1f71 *man/mvnintGHK.Rd
@@ -50,5 +50,5 @@ d2d14de06cb10e5f83eb3b7b2029b6b6 *src/Makevars
 ad7797f2820e19803f26a5aebfccc7cd *src/Makevars.win
 8949108dae7eaddc788e2cd41260aae9 *src/NelsenFHUB.cpp
 13bfaa0fc1b4bf3651097f94a6c528c5 *src/gcKrig_init.c
-51ba9d706295a79a3c5ff06b2fdda9f0 *src/gcgcFun.cpp
-d3cea00af9a8347c9a8cb1b0cfa45c82 *src/mvnInt.cpp
+5a7918fa234ed89654344ffbb7aa4712 *src/gcgcFun.cpp
+c1ca7335ec5c070081392fd9852a8949 *src/mvnInt.cpp

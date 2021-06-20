@@ -45,7 +45,7 @@ All covariates of the data had been standardized to have mean 0 and variance 1.
 \references{
 Johnson, D. and Hoeting, J. (2011) Bayesian Multimodel Inference for Geostatistical Regression Models,
 \emph{PLOS ONE, 6:e25677}.
-\url{http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0025677}.
+\url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0025677}.
 }
 \examples{
 data(AtlanticFish)

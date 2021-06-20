@@ -1,5 +1,6 @@
 #include <Rmath.h>
 #include <RcppArmadillo.h>
+#include <float.h>
 
 
 using namespace Rcpp;
