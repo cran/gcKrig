@@ -1,6 +1,8 @@
+#define STRICT_R_HEADERS
 #include <Rmath.h>
 #include <RcppArmadillo.h>
-#include <float.h>
+#include <cfloat>
+
 
 
 using namespace Rcpp;
@@ -32,7 +34,7 @@ RcppExport SEXP ghkgcmr(SEXP R_, SEXP pdf_, SEXP cdf_, SEXP nrep_){
   arma::mat L = arma::chol(R, "lower");
   arma::vec llik(dim); arma::vec lower(dim); arma::vec upper(dim);
   double yi, lk , plow, pup, mw, s2, mwold, biasold, xr1, xr2, randu,
-  EPS = sqrt(DOUBLE_EPS), EPS1=1-EPS;
+  EPS = sqrt(DBL_EPSILON), EPS1=1-EPS;
   arma::vec xr(dim);
   arma::vec w(nrep); w.ones();
   mwold = 1 ; biasold = 0 ;
@@ -83,7 +85,7 @@ RcppExport SEXP ghkgcmr2(SEXP R_, SEXP pdf_, SEXP cdf_, SEXP nrep_){
   int i, j, r ,ii, k;
   arma::vec llik(dim);
   double yi, lk , plow, pup, mw, s2, mwold, biasold, xr1, xr2, randu,
-  EPS = sqrt(DOUBLE_EPS), EPS1=1-EPS;
+  EPS = sqrt(DBL_EPSILON), EPS1=1-EPS;
   const double eps = std::numeric_limits<double>::epsilon();
   arma::vec xr(dim), ap(dim), bp(dim), w(nrep); w.ones();
   mwold = 1 ; biasold = 0 ;

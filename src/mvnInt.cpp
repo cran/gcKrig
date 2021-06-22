@@ -1,6 +1,7 @@
+#define STRICT_R_HEADERS
 #include <Rmath.h>
 #include <RcppArmadillo.h>
-#include <float.h>
+#include <cfloat>
 
 
 using namespace Rcpp;
@@ -131,7 +132,7 @@ RcppExport SEXP mvnintGHKcpp(SEXP mu_, SEXP R_, SEXP lower_, SEXP upper_, SEXP n
   arma::mat L = arma::chol(R).t();
   double res_ = 0, prod, MU_, eta_, gamma_, ans_;
   const double EPS = std::numeric_limits<double>::min();
-  const double EPS2 = DOUBLE_EPS;
+  const double EPS2 = DBL_EPSILON;
   double* eta = & eta_; double* res = & res_; double* ans = &ans_;
   double* gamma = & gamma_; double* MU = & MU_;
   GetRNGstate();

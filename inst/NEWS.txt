@@ -36,3 +36,8 @@ Version 1.1.4
 Version 1.1.5
 -------------
 - update to accommodate the use of STRICT_R_HEADERS as noticed by Dirk Eddelbuettel
+
+Version 1.1.6
+-------------
+- add define STRICT_R_HEADERS and try to solve two notes
+

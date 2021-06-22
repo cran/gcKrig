@@ -1,4 +1,4 @@
-7366d749d0ed471fdb365ca042202dc3 *DESCRIPTION
+784581a39e3d078e3a9854260e1fa571 *DESCRIPTION
 994827a7f96ae83d82df290caa5c9617 *NAMESPACE
 d87770e71f8b2564290a0e20621cbce6 *R/Plotgc.R
 a2c9486864563555d2708789365db413 *R/S3Methods.R
@@ -8,13 +8,13 @@ a2c9486864563555d2708789365db413 *R/S3Methods.R
 16318cd03e011b3bcb6e9ab1d2386fdb *R/predGHK.R
 6cfdc2d3c6237df45e1ae7cc8e5f8374 *R/predGQT.R
 58e40393f9ee56720c411f28d7026a6e *R/simFHUB.R
-d0ae26f6c5f9f0a443e682e68d4fb8be *build/partial.rdb
+9c767d250f764fae8d0e376e6c053279 *build/partial.rdb
 1b01c1a618ec5bc9db5323da9b6d8c2f *data/AtlanticFish.RData
 e65ee87c7cd2f3e21a10d956797a5a45 *data/LansingTrees.RData
 9f2118e903a7e773cfbf3503856e7efe *data/OilWell.RData
 21e80a0c939e2aa4b91dcd3c985c5bee *data/Weed95.RData
 1e2aa57f42a8a202f79364ac248c50c2 *inst/CITATION
-211b5f43f8d63aeb1f8243b27f9ede7e *inst/NEWS.txt
+b5a35066f1172b71d4eb6125d6b1f4d6 *inst/NEWS.txt
 d3c3cffa6bbfa77d97aac6e968663291 *man/AtlanticFish.Rd
 43a69ba766e767993185e12ae98783cf *man/FHUBdiscrete.Rd
 23a2fbbc0fb857a38bc4562b4f4ab175 *man/LansingTrees.Rd
@@ -50,5 +50,5 @@ d2d14de06cb10e5f83eb3b7b2029b6b6 *src/Makevars
 ad7797f2820e19803f26a5aebfccc7cd *src/Makevars.win
 8949108dae7eaddc788e2cd41260aae9 *src/NelsenFHUB.cpp
 13bfaa0fc1b4bf3651097f94a6c528c5 *src/gcKrig_init.c
-5a7918fa234ed89654344ffbb7aa4712 *src/gcgcFun.cpp
-c1ca7335ec5c070081392fd9852a8949 *src/mvnInt.cpp
+2635572f719ba673525f7c7443ff973f *src/gcgcFun.cpp
+588cce0c6a4327e520e07df117fe5fde *src/mvnInt.cpp
