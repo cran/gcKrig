@@ -54,7 +54,8 @@ Zifei Han \email{hanzifei1@gmail.com}
 }
 
 \references{
-Cribari-Neto, F. and Zeileis, A. (2010) Beta regression in R. \emph{Journal of Statistical Software, 34:1-24}. \url{https://www.jstatsoft.org/v34/i02/}.
+Cribari-Neto, F. and Zeileis, A. (2010) Beta regression in R. \emph{Journal of Statistical Software}, \bold{34}(2), 1--24.
+\doi{10.18637/jss.v034.i02}.
 
 Ferrari, S.L.P. and Cribari-Neto, F. (2004) Beta regression for modeling rates and proportions. \emph{Journal of Applied Statistics, 31:799-815}.
 
