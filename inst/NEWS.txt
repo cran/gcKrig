@@ -41,8 +41,12 @@ Version 1.1.6
 -------------
 - add define STRICT_R_HEADERS and try to solve two notes
 
-
 Version 1.1.7
 -------------
 - change citation style by using doi instead of url for JSS articles
+
+Version 1.1.8
+-------------
+- change the function corrTG to allow the users to specify the number of terms in the Hermite expansion
+
 

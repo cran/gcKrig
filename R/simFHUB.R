@@ -107,19 +107,27 @@ FHUBdiscrete <- function(marg1, marg2, mu1, mu2, od1 = 0, od2 = 0,
 
 
 
-corrTG <- function(marg1, marg2, corrGauss = 0.5, method = "integral", nrep = 1000){
+corrTG <- function(marg1, marg2, corrGauss = 0.5, method = "integral", nrep = 1000, kmax = 10,
+                   earlystop = FALSE, epscut = 1e-3){
 
- if(!inherits(marg1, "marginal.gc"))  stop("'marg1' must be a function of the class marginal.gc")
- if(!inherits(marg2, "marginal.gc")) stop("'marg2' must be a function of the class marginal.gc")
+  if(!inherits(marg1, "marginal.gc"))  stop("'marg1' must be a function of the class marginal.gc")
+  if(!inherits(marg2, "marginal.gc")) stop("'marg2' must be a function of the class marginal.gc")
 
-  atmp <- rep(0,50)
+  atmp <- rep(0, kmax)
   if(method == "integral"){
-    for(u in 1:50){
-      atmp[u] = marg1$int.marg(order = u)[[1]]*marg2$int.marg(order = u)[[1]]*(corrGauss)^(u)/factorial(u)
-      if (abs(atmp[u]) < .Machine$double.eps^0.5*sqrt(marg1$margvar*marg2$margvar) )
-        break
+    for(u in 1:kmax){
+      if(isTRUE(earlystop)){
+        atmp[u] = marg1$int.marg(order = u)[[1]]*marg2$int.marg(order = u)[[1]]*(corrGauss)^(u)/factorial(u)
+        if(u >= 3){
+          if(max(abs(atmp[c(u-2, u-1, u)])) < epscut*sqrt(marg1$margvar*marg2$margvar))
+            break
+        }
+      }else{
+        atmp[u] = marg1$int.marg(order = u)[[1]]*marg2$int.marg(order = u)[[1]]*(corrGauss)^(u)/factorial(u)
+      }
     }
     corr <- sum(atmp)/sqrt(marg1$margvar*marg2$margvar)
+    coef_series = atmp[1:u]/sqrt(marg1$margvar*marg2$margvar)
   }
 
   if(method == "mc" & corrGauss == 1){
@@ -128,15 +136,20 @@ corrTG <- function(marg1, marg2, corrGauss = 0.5, method = "integral", nrep = 10
 
   if(method == "mc" & corrGauss < 1){
     if (requireNamespace("MASS", quietly = TRUE)) {
-            simnorm = pnorm(MASS::mvrnorm(nrep, mu = c(0,0),
-                                          Sigma = matrix(c(1,corrGauss,corrGauss,1),2,2)))
+      simnorm = pnorm(MASS::mvrnorm(nrep, mu = c(0,0),
+                                    Sigma = matrix(c(1,corrGauss,corrGauss,1),2,2)))
     }else{
       stop("Please install {MASS} first!")
     }
-  simmarg1 <- marg1$q(p = simnorm[,1])
-  simmarg2 <- marg2$q(p = simnorm[,2])
-  corr <- cor(simmarg1, simmarg2)
+    simmarg1 <- marg1$q(p = simnorm[,1])
+    simmarg2 <- marg2$q(p = simnorm[,2])
+    corr <- cor(simmarg1, simmarg2)
   }
   corr <- ifelse(corr>1, 1, corr)
-  return(corr)
+  if(method == "integral"){
+    return(list("corr" = corr, "coef_series" = coef_series))
+  }
+  if(method == "mc"){
+    return(list("corr" = corr))
+  }
 }
